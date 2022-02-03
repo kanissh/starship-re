@@ -30,6 +30,8 @@ GLfloat camX = 0.0f;
 GLfloat camZ = 0.0f;
 
 GLUquadricObj* qobj;
+GLfloat superheavyHeight = 15;
+GLfloat rocketRadius = 1;
 
 GLuint blackTex;
 GLuint offGreyTex;
@@ -172,7 +174,7 @@ void display() {
     //drawLaunchTower(offGreyTex, blackTex, 23.3);
 
     Starship ss;
-    ss.drawBottomFins(offGreyTex,4);
+    ss.renderStarship(offGreyTex, qobj);
 
     glPopMatrix();
 

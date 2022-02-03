@@ -10,6 +10,14 @@ class Starship
 {
 private:
 	GLfloat finthickness = 0.15;
+	GLfloat smallfinthickness = 0.05;
+	GLfloat topConeHeight = 2.3;
+	GLfloat topConeTopRad = 0.2;
+	GLfloat topConeBottomRad = 1;
+	GLfloat topFinHeight = 3.5;
+	GLfloat bottomFinHeight = 4;
+	GLfloat rocketRadius = 1;
+	GLfloat starshipHeight = 8.3; //11
 
 public:
 	void drawBody(GLuint tex, GLUquadricObj* qobj, GLfloat radius, GLfloat height) {
@@ -190,6 +198,95 @@ public:
 		glPopMatrix();
 		//glDisable(GL_TEXTURE_2D);
 
+
+	}
+
+public:
+	void drawSmallFins(GLuint tex) {
+		/*glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);*/
+		glPushMatrix();
+		glBegin(GL_POLYGON);
+
+		glColor3f(1, 1, 1);
+		glVertex3f(1.25, 0, 0);
+		glVertex3f(1.25, 1.2, 0);
+		glVertex3f(1, 1.5, 0);
+		glVertex3f(-1, 1.5, 0);
+		glVertex3f(-1.25, 1.2, 0);
+		glVertex3f(-1.25, 0, 0);
+		glVertex3f(1.25, 0, 0);
+
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslatef(0, 0, -smallfinthickness);
+		glBegin(GL_POLYGON);
+
+		glColor3f(0, 1, 1);
+		glVertex3f(1.25, 0, 0);
+		glVertex3f(-1.25, 0, 0);
+		glVertex3f(-1.25, 1.2, 0);
+		glVertex3f(-1, 1.5, 0);
+		glVertex3f(1, 1.5, 0);
+		glVertex3f(1.25, 1.2, 0);
+		glVertex3f(1.25, 0, 0);
+		glEnd();
+		glPopMatrix();
+
+		glPushMatrix();
+		glBegin(GL_QUAD_STRIP);
+		glColor3f(0, 1, 0);
+		glVertex3f(1.25, 0, 0);
+		glVertex3f(1.25, 0, -smallfinthickness);
+		glVertex3f(1.25, 1.2, 0);
+		glVertex3f(1.25, 1.2, -smallfinthickness);
+		glVertex3f(1, 1.5, 0);
+		glVertex3f(1, 1.5, -smallfinthickness);
+		glVertex3f(-1, 1.5, 0);
+		glVertex3f(-1, 1.5, -smallfinthickness);
+		glVertex3f(-1.25, 1.2, 0);
+		glVertex3f(-1.25, 1.2, -smallfinthickness);
+		glVertex3f(-1.25, 0, 0);
+		glVertex3f(-1.25, 0, -smallfinthickness);
+		glVertex3f(1.25, 0, 0);
+		glVertex3f(1.25, 0, -smallfinthickness);
+		glEnd();
+		glPopMatrix();
+
+		//glDisable(GL_TEXTURE_2D);
+	}
+
+public:
+	void renderStarship(GLuint tex, 
+		GLUquadricObj* qobj) {
+		
+		//cylinder, top cone
+		glPushMatrix();
+		drawBody(tex, qobj, rocketRadius, starshipHeight);
+		glTranslatef(0, starshipHeight, 0);
+		drawTopCone(tex, qobj, topConeTopRad, topConeBottomRad, topConeHeight);
+		glPopMatrix();
+		
+		//top, bottom fins
+		glPushMatrix();
+		glTranslatef(0, 0, finthickness/2);
+		drawBottomFins(tex, bottomFinHeight);
+		glTranslatef(0, starshipHeight + topConeHeight - topFinHeight, 0);
+		drawTopFins(tex, topFinHeight);
+		glPopMatrix();
+
+		//small fins
+		glPushMatrix();
+		glTranslatef(0, 0, finthickness / 2);
+		
+		glRotatef(60, 0, 1, 0);
+		drawSmallFins(tex);
+
+		glRotatef(60, 0, 1, 0);
+		drawSmallFins(tex);
+		glPopMatrix();
 
 	}
 
