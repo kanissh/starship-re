@@ -99,6 +99,7 @@ public:
 		drawBottomFins(tex, bottomFinHeight);
 		glRotatef(60, 0, 1, 0);
 		drawBottomFins(tex, bottomFinHeight);
+
 		glPopMatrix();
 	}
 };

@@ -172,15 +172,15 @@ void display() {
     glPushMatrix();
     //drawing code
     //drawLaunchTower(offGreyTex, blackTex, 23.3);
-
-    /*Starship ss;
-    ss.renderStarship(offGreyTex, qobj);*/
-
+    
     Superheavy sh;
-    //sh.drawBody(offGreyTex, qobj, 1, 15);
-    //sh.drawBottomFins(offGreyTex, 3.75);
     sh.renderSuperheavy(offGreyTex, qobj);
 
+    Starship ss;
+    glTranslatef(0, 15, 0);
+    ss.renderStarship(offGreyTex, qobj);
+
+    
     glPopMatrix();
 
     glPopMatrix();
