@@ -6,7 +6,7 @@
 
 #include "barebones.h"
 #include "launchtower/launchtower.h"
-#include "starship/Starship.cpp"
+#include "starship/starship.h"
 
 
 GLfloat windowW = 10;
@@ -172,7 +172,7 @@ void display() {
     //drawLaunchTower(offGreyTex, blackTex, 23.3);
 
     Starship ss;
-    ss.drawBody(offGreyTex, qobj, 1, 8.3);
+    ss.drawBottomFins(offGreyTex,4);
 
     glPopMatrix();
 
