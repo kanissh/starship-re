@@ -154,6 +154,7 @@
     <ClInclude Include="launchtower\launchtower.h" />
     <ClInclude Include="starship\starship.h" />
     <ClInclude Include="superheavy\superheavy.h" />
+    <ClInclude Include="o2tower\o2tower.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

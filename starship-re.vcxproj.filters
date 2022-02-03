@@ -37,5 +37,8 @@
     <ClInclude Include="superheavy\superheavy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="o2tower\o2tower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

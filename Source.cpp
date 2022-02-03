@@ -8,6 +8,7 @@
 #include "launchtower/launchtower.h"
 #include "starship/starship.h"
 #include "superheavy/superheavy.h"
+#include "o2tower/o2tower.h"
 
 
 GLfloat windowW = 10;
@@ -173,12 +174,17 @@ void display() {
     //drawing code
     //drawLaunchTower(offGreyTex, blackTex, 23.3);
     
-    Superheavy sh;
+   /* Superheavy sh;
     sh.renderSuperheavy(offGreyTex, qobj);
 
     Starship ss;
     glTranslatef(0, 15, 0);
-    ss.renderStarship(offGreyTex, qobj);
+    ss.renderStarship(offGreyTex, qobj);*/
+
+    O2tower o2t;
+    //o2t.drawTank(offGreyTex, qobj);
+    //o2t.drawCenterpipe(offGreyTex, qobj, 10);
+    o2t.renderO2tower(qobj, offGreyTex, offGreyTex, offGreyTex);
 
     
     glPopMatrix();
