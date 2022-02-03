@@ -167,61 +167,27 @@ public:
 
 		glPopMatrix();
 
-		////rectangular sides
-		//glPushMatrix();
-		//glTranslatef(0, superheavyHeight, 0);
-
-		////bottom
-		//glBegin(GL_POLYGON);
-		//glColor3f(1, 1, 1);
-		//glVertex3f(2, 0, 0.15);
-		//glVertex3f(-2, 0, 0.15);
-		//glVertex3f(-2, 0, -0.15);
-		//glVertex3f(2, 0, -0.15);
-		//glVertex3f(2, 0, 0.15);
-		//glEnd();
-
-		////side
-		//glBegin(GL_POLYGON);
-		//glColor3f(1, 1, 1);
-		//glVertex3f(2, 0, 0.15);
-		//glVertex3f(2, 0, -0.15);
-		//glVertex3f(2, 1.5, -0.15);
-		//glVertex3f(2, 1.5, 0.15);
-		//glVertex3f(2, 0, 0.15);
-		//glEnd();
-
-		////side
-		//glBegin(GL_POLYGON);
-		//glColor3f(1, 1, 1);
-		//glVertex3f(-2, 0, 0.15);
-		//glVertex3f(-2, 0, -0.15);
-		//glVertex3f(-2, 1.5, -0.15);
-		//glVertex3f(-2, 1.5, 0.15);
-		//glVertex3f(-2, 0, 0.15);
-		//glEnd();
-
-		////side slant
-		//glBegin(GL_POLYGON);
-		//glColor3f(1, 1, 1);
-		//glVertex3f(-2, 1.5, -0.15);
-		//glVertex3f(-2, 1.5, 0.15);
-		//glVertex3f(-1, bottomFinHeight, 0.15);
-		//glVertex3f(-1, bottomFinHeight, -0.15);
-		//glVertex3f(-2, 1.5, -0.15);
-		//glEnd();
-
-		////side slant
-		//glBegin(GL_POLYGON);
-		//glColor3f(1, 1, 1);
-		//glVertex3f(2, 1.5, -0.15);
-		//glVertex3f(2, 1.5, 0.15);
-		//glVertex3f(1, bottomFinHeight, 0.15);
-		//glVertex3f(1, bottomFinHeight, -0.15);
-		//glVertex3f(2, 1.5, -0.15);
-		//glEnd();
-
-		//glPopMatrix();
+		glPushMatrix();
+		glBegin(GL_QUAD_STRIP);
+		glColor3f(0, 1, 1);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, -finthickness);
+		glVertex3f(2, 0, 0);
+		glVertex3f(2, 0, -finthickness);
+		glVertex3f(2, 1.5, 0);
+		glVertex3f(2, 1.5, -finthickness);
+		glVertex3f(1, height, 0);
+		glVertex3f(1, height, -finthickness);
+		glVertex3f(-1, height, 0);
+		glVertex3f(-1, height, -finthickness);
+		glVertex3f(-2, 1.5, 0);
+		glVertex3f(-2, 1.5, -finthickness);
+		glVertex3f(-2, 0, 0);
+		glVertex3f(-2, 0, -finthickness);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, -finthickness);
+		glEnd();
+		glPopMatrix();
 		//glDisable(GL_TEXTURE_2D);
 
 
