@@ -7,6 +7,7 @@
 #include "barebones.h"
 #include "launchtower/launchtower.h"
 #include "starship/starship.h"
+#include "superheavy/superheavy.h"
 
 
 GLfloat windowW = 10;
@@ -30,8 +31,7 @@ GLfloat camX = 0.0f;
 GLfloat camZ = 0.0f;
 
 GLUquadricObj* qobj;
-GLfloat superheavyHeight = 15;
-GLfloat rocketRadius = 1;
+
 
 GLuint blackTex;
 GLuint offGreyTex;
@@ -173,8 +173,13 @@ void display() {
     //drawing code
     //drawLaunchTower(offGreyTex, blackTex, 23.3);
 
-    Starship ss;
-    ss.renderStarship(offGreyTex, qobj);
+    /*Starship ss;
+    ss.renderStarship(offGreyTex, qobj);*/
+
+    Superheavy sh;
+    //sh.drawBody(offGreyTex, qobj, 1, 15);
+    //sh.drawBottomFins(offGreyTex, 3.75);
+    sh.renderSuperheavy(offGreyTex, qobj);
 
     glPopMatrix();
 

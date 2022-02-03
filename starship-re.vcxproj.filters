@@ -34,5 +34,8 @@
     <ClInclude Include="starship\starship.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="superheavy\superheavy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
