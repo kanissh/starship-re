@@ -48,6 +48,19 @@ GLuint znTex;
 GLuint redRustTex;
 GLuint baremetalTex;
 
+bool showWireframe = false;
+bool showAxes = false;
+bool showGrid = false;
+
+bool setCamSupports = true;
+bool setCamRocket = true;
+
+GLint refreshMills = 60;
+GLboolean launchFlag = false;
+GLfloat launchSupportDisplacement = 0;
+GLfloat rocketPathDisplacement = 0;
+
+
 void init();
 void display();
 void reshape(GLsizei, GLsizei);
@@ -58,109 +71,109 @@ void setupLighting();
 
 GLfloat animateRotation = 0.0f; //global add to glrotatef
 
-void initTexture() {
-    baremetalTex = SOIL_load_OGL_texture
-    (
-        "textures/bare-metal.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    steelTex = SOIL_load_OGL_texture
-    (
-        "textures/steel-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    steelTexFins = SOIL_load_OGL_texture
-    (
-        "textures/steel-tex-fins.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    concreteTex = SOIL_load_OGL_texture
-    (
-        "textures/concrete-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    concreteTexBase = SOIL_load_OGL_texture
-    (
-        "textures/concrete-tex.bmp",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    redPillarTex = SOIL_load_OGL_texture
-    (
-        "textures/red-pillar-tex.bmp",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    whiteMetalTex = SOIL_load_OGL_texture
-    (
-        "textures/white-metal-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    blackTex = SOIL_load_OGL_texture
-    (
-        "textures/black-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    offGreyTex = SOIL_load_OGL_texture
-    (
-        "textures/off-grey-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    offWhiteTex = SOIL_load_OGL_texture
-    (
-        "textures/off-white-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    znTex = SOIL_load_OGL_texture
-    (
-        "textures/zinc-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    redRustTex = SOIL_load_OGL_texture
-    (
-        "textures/red-rust-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-}
+//void initTexture() {
+//    baremetalTex = SOIL_load_OGL_texture
+//    (
+//        "textures/bare-metal.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    steelTex = SOIL_load_OGL_texture
+//    (
+//        "textures/steel-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    steelTexFins = SOIL_load_OGL_texture
+//    (
+//        "textures/steel-tex-fins.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    concreteTex = SOIL_load_OGL_texture
+//    (
+//        "textures/concrete-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    concreteTexBase = SOIL_load_OGL_texture
+//    (
+//        "textures/concrete-tex.bmp",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    redPillarTex = SOIL_load_OGL_texture
+//    (
+//        "textures/red-pillar-tex.bmp",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    whiteMetalTex = SOIL_load_OGL_texture
+//    (
+//        "textures/white-metal-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    blackTex = SOIL_load_OGL_texture
+//    (
+//        "textures/black-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    offGreyTex = SOIL_load_OGL_texture
+//    (
+//        "textures/off-grey-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    offWhiteTex = SOIL_load_OGL_texture
+//    (
+//        "textures/off-white-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    znTex = SOIL_load_OGL_texture
+//    (
+//        "textures/zinc-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//    redRustTex = SOIL_load_OGL_texture
+//    (
+//        "textures/red-rust-tex.jpg",
+//        SOIL_LOAD_AUTO,
+//        SOIL_CREATE_NEW_ID,
+//        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+//    );
+//
+//
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+//}
 
 void setMaterials() {//call inside the drawing funtion at top , can define different for dif
     float mat_ambient[] = { 0.329f, 0.223f, 0.0274f, 1.0f };
@@ -209,7 +222,7 @@ void Timer(int x) {
     animateRotation += animateRotation >= 360.0 ? -animateRotation : 5;
     glutPostRedisplay();
 
-    glutTimerFunc(60, Timer, 1);
+    glutTimerFunc(refreshMills, Timer, 1);
 }
 
 
@@ -224,7 +237,7 @@ void init() {
     glShadeModel(GL_SMOOTH); // or GL_FLAT 
     glEnable(GL_COLOR_MATERIAL);
 
-    initTexture();
+    //initTexture();
 
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     qobj = gluNewQuadric();
@@ -281,8 +294,13 @@ void display() {
     glRotatef(rotY, 0.0f, 1.0f, 0.0f);
     glRotatef(rotZ, 0.0f, 0.0f, 1.0f);
 
-    drawAxes();
-    drawGrid();
+    if (showAxes) {
+        drawAxes();
+    }
+
+    if (showGrid) {
+        drawGrid();
+    }
 
     //stage
     glPushMatrix();
@@ -292,6 +310,20 @@ void display() {
     
     //superheavy and starship
     glPushMatrix();
+    if (launchFlag && launchSupportDisplacement >= 2) {
+
+        if (setCamRocket) {
+            camX = 0; camY = 32; camZ = 0; rotX = 0; rotY = -130; rotZ = 0; moveX = 3; moveY = 0; moveZ = 0;
+            setCamRocket = false;
+        }
+
+        glTranslatef(0, rocketPathDisplacement, 0);
+        if (camY < 100) {
+            rocketPathDisplacement += 1;
+            camY += 1;
+        }
+    }
+
     Superheavy sh;
     Starship ss;
     sh.renderSuperheavy(steelTex,steelTexFins, qobj);
@@ -311,6 +343,19 @@ void display() {
 
     //sup
     glPushMatrix();
+    if (launchFlag) {
+
+        if (setCamSupports) {
+            camX = 0; camY = 21; camZ = 0; rotX = 0; rotY = -90; rotZ =0; moveX = 3; moveY = 0; moveZ = 0;
+            setCamSupports = false;
+        }
+        
+        glTranslatef(0, 0, launchSupportDisplacement);
+        if (launchSupportDisplacement < 2) {
+            launchSupportDisplacement += 0.2;
+        }
+    }
+
     glTranslatef(-0.3, sh.getSuperheavyHeight() - 3, 1);
     lt.renderLauchsupport(znTex, qobj);
     
@@ -355,34 +400,71 @@ void display() {
 }
 
 void keyboardSpecial(int key, int x, int y) {
-    if (key == GLUT_KEY_UP)
+    if (key == GLUT_KEY_UP) {
         moveZ += 1;
-
-    if (key == GLUT_KEY_DOWN)
+    }
+    else if (key == GLUT_KEY_DOWN) {
         moveZ -= 1;
-
-    if (key == GLUT_KEY_LEFT)
-        rotY -= 5.0;
-
-    if (key == GLUT_KEY_RIGHT)
-        rotY += 1.0;
+    }
+    else if (key == GLUT_KEY_LEFT) {
+        moveX += 1;
+    }
+    else if (key == GLUT_KEY_RIGHT) {
+        moveX -= 1;
+    }
 
     glutPostRedisplay();
 }
 
 void keyboard(unsigned char key, int x, int y) {
-    if (key == 'w')
+    if (key == 'w') {
         camY += 0.5;
-    if (key == 's')
+    }
+    else if (key == 's') {
         camY -= 0.5;
-    if (key == 'b')
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    if (key == 'B')
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    if (key == 'c')
-        glEnable(GL_CULL_FACE);
-    if (key == 'C')
-        glDisable(GL_CULL_FACE);
+    }
+    else if (key == 'a') {
+        rotY += 5.0;
+    }
+    else if (key == 'd') {
+        rotY -= 5.0;
+    }
+    else if (key == '2') {
+        moveY += 1;
+    }
+    else if (key == '8') {
+        moveY -= 1;
+    }
+    else if (key == 'c') {
+        if (showWireframe)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        else
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        showWireframe = !showWireframe;
+    }
+    else if (key == 'x') {
+        showAxes = !showAxes;
+    }
+    else if (key == 'g') {
+        showGrid = !showGrid;
+    }
+   else if (key == 'r') {
+        launchFlag = false;
+        launchSupportDisplacement = 0;
+        rocketPathDisplacement = 0;
+        setCamSupports = true;
+        camY = -10;
+        camZ = 20;
+        moveY = 0;
+        moveX = 0;
+        moveZ = 10;
+    }
+    else if (key == 'p') {
+        std::cout << camX << "|" << camY << "|" << camZ << "|" << rotX << "|" << rotY << "|" << rotZ << "|" << moveX << "|" << moveY << "|" << moveZ;
+    }
+    else if (key == 'l') {
+        launchFlag = true;
+    }
 
     glutPostRedisplay();
 
@@ -399,7 +481,7 @@ int main(int argc, char** argv) {
     glutKeyboardFunc(keyboard);
     glutSpecialFunc(keyboardSpecial);
     init();
-    glutTimerFunc(60.0, Timer, 1);
+    glutTimerFunc(0, Timer, 0);
     glutMainLoop();
     return 0;
 }
