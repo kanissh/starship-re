@@ -9,6 +9,7 @@
 #include "starship/starship.h"
 #include "superheavy/superheavy.h"
 #include "o2tower/o2tower.h"
+#include "comtower/comtower.h"
 
 
 GLfloat windowW = 10;
@@ -181,11 +182,15 @@ void display() {
     glTranslatef(0, 15, 0);
     ss.renderStarship(offGreyTex, qobj);*/
 
-    O2tower o2t;
-    //o2t.drawTank(offGreyTex, qobj);
-    //o2t.drawCenterpipe(offGreyTex, qobj, 10);
-    o2t.renderO2tower(qobj, offGreyTex, offGreyTex, offGreyTex);
+    /*O2tower o2t;
+    o2t.drawTank(offGreyTex, qobj);
+    o2t.drawCenterpipe(offGreyTex, qobj, 10);
+    o2t.renderO2tower(qobj, offGreyTex, offGreyTex, offGreyTex);*/
 
+    Comtower ct;
+    //ct.drawCircularPillars(offGreyTex ,qobj);
+    //ct.drawStage(offGreyTex ,qobj);
+    ct.renderComtower(offGreyTex, qobj);
     
     glPopMatrix();
 
@@ -214,11 +219,14 @@ void keyboard(unsigned char key, int x, int y) {
         camY += 0.5;
     if (key == 's')
         camY -= 0.5;
-
-    if (key == 'c')
+    if (key == 'b')
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    if (key == 'C')
+    if (key == 'B')
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    if (key == 'c')
+        glEnable(GL_CULL_FACE);
+    if (key == 'C')
+        glDisable(GL_CULL_FACE);
 
     glutPostRedisplay();
 

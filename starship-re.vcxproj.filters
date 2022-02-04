@@ -40,5 +40,8 @@
     <ClInclude Include="o2tower\o2tower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="comtower\comtower.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
