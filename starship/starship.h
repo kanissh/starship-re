@@ -64,8 +64,8 @@ public:
 
 public:
 	void drawTopFins(GLuint tex, GLfloat height) {
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 
 		glPushMatrix();
 		glBegin(GL_POLYGON);
@@ -136,15 +136,15 @@ public:
 		glEnd();
 		glPopMatrix();
 
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 
 	}
 
 public:
 	void drawBottomFins(GLuint tex, GLfloat height) {
 
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 		
 		//large face
 		glPushMatrix();
@@ -201,15 +201,15 @@ public:
 		glVertex3f(0, 0, -finthickness);
 		glEnd();
 		glPopMatrix();
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 
 
 	}
 
 public:
 	void drawSmallFins(GLuint tex) {
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 		glPushMatrix();
 		glBegin(GL_POLYGON);
 
@@ -260,26 +260,27 @@ public:
 		glEnd();
 		glPopMatrix();
 
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 	}
 
 public:
-	void renderStarship(GLuint tex, 
+	void renderStarship(GLuint bodytex,
+		GLuint fintex,
 		GLUquadricObj* qobj) {
 		
 		//cylinder, top cone
 		glPushMatrix();
-		drawBody(tex, qobj, rocketRadius, starshipHeight);
+		drawBody(bodytex, qobj, rocketRadius, starshipHeight);
 		glTranslatef(0, starshipHeight, 0);
-		drawTopCone(tex, qobj, topConeTopRad, topConeBottomRad, topConeHeight);
+		drawTopCone(bodytex, qobj, topConeTopRad, topConeBottomRad, topConeHeight);
 		glPopMatrix();
 		
 		//top, bottom fins
 		glPushMatrix();
 		glTranslatef(0, 0, finthickness/2);
-		drawBottomFins(tex, bottomFinHeight);
+		drawBottomFins(fintex, bottomFinHeight);
 		glTranslatef(0, starshipHeight + topConeHeight - topFinHeight, 0);
-		drawTopFins(tex, topFinHeight);
+		drawTopFins(fintex, topFinHeight);
 		glPopMatrix();
 
 		//small fins
@@ -287,10 +288,10 @@ public:
 		glTranslatef(0, 0, finthickness / 2);
 		
 		glRotatef(60, 0, 1, 0);
-		drawSmallFins(tex);
+		drawSmallFins(fintex);
 
 		glRotatef(60, 0, 1, 0);
-		drawSmallFins(tex);
+		drawSmallFins(fintex);
 		glPopMatrix();
 
 	}

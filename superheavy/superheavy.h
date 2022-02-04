@@ -21,21 +21,21 @@ public:
 public:
 	void drawBody(GLuint tex, GLUquadricObj* qobj, GLfloat radius, GLfloat height) {
 		glPushMatrix();
-		glColor3f(1, 0.2, 0);
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex);*/
+		
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 		gluQuadricTexture(qobj, GL_TRUE);
 		gluQuadricNormals(qobj, GLU_SMOOTH);
 		glRotatef(90, -1, 0, 0);
 		gluCylinder(qobj, radius, radius, height, 100, 100);
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 	}
 
 public:
 	void drawBottomFins(GLuint tex, GLfloat height) {
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 		
 		glPushMatrix();
 		glBegin(GL_POLYGON);
@@ -89,21 +89,22 @@ public:
 		glEnd();
 		glPopMatrix();
 
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 	}
 
 public:
-	void renderSuperheavy(GLuint tex, GLUquadricObj* qobj) {
+	void renderSuperheavy(GLuint bodytex, GLuint fintex, GLUquadricObj* qobj) {
 		glPushMatrix();
-		drawBody(tex, qobj, rocketRadius, superheavyHeight);
+	
+		drawBody(bodytex, qobj, rocketRadius, superheavyHeight);
 
 		glTranslatef(0, 0, finthickness / 2);
 
-		drawBottomFins(tex, bottomFinHeight);
+		drawBottomFins(fintex, bottomFinHeight);
 		glRotatef(60, 0, 1, 0);
-		drawBottomFins(tex, bottomFinHeight);
+		drawBottomFins(fintex, bottomFinHeight);
 		glRotatef(60, 0, 1, 0);
-		drawBottomFins(tex, bottomFinHeight);
+		drawBottomFins(fintex, bottomFinHeight);
 
 		glPopMatrix();
 	}

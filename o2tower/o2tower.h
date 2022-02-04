@@ -19,10 +19,10 @@ private:
 public:
 	void drawTank(GLuint tex, GLUquadricObj* qobj) {
 
-		/*glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, tex);
 		gluQuadricTexture(qobj, GL_TRUE);
-		gluQuadricNormals(qobj, GLU_SMOOTH);*/
+		gluQuadricNormals(qobj, GLU_SMOOTH);
 		double eqnTop[] = { 0.0, 0.0, 1.0, 0.0 };
 		double eqnBottom[] = { 0.0, 0.0, -1.0, 0.0 };
 
@@ -63,7 +63,7 @@ public:
 
 		glPopMatrix();
 
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 	}
 
 public:
@@ -119,8 +119,10 @@ public:
 	
 		
 		glPushMatrix();
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		gluQuadricTexture(qobj, GL_TRUE);
+		gluQuadricNormals(qobj, GLU_SMOOTH);
 		glColor3f(1, 1, 0.25);
 		glTranslatef(0, 0, 2);
 		glutSolidTorus(0.125, 2.69, 100, 100);
@@ -133,7 +135,7 @@ public:
 
 		glTranslatef(0, 0, 2);
 		glutSolidTorus(0.125, 1.73, 100, 100);
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 
 		glPopMatrix();

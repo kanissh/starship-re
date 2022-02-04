@@ -22,11 +22,11 @@ public:
 		
 		glPushMatrix();
 		glColor3f(0.1, 1, 0);
-		/*glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, redPillarTex);
-			gluQuadricTexture(qobj, GL_TRUE);
-			gluQuadricNormals(qobj, GLU_SMOOTH);
-			glRotatef(90, -1, 0, 0);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		gluQuadricTexture(qobj, GL_TRUE);
+		gluQuadricNormals(qobj, GLU_SMOOTH);
+			
 		//pillars
 		glPushMatrix();
 		glTranslatef(comTowerDistanceFromOrigin, comTowerDistanceFromOrigin, 0);
@@ -48,7 +48,7 @@ public:
 		gluCylinder(qobj, comTowerPillarRadius, comTowerPillarRadius, comTowerHeight, 100, 100);
 		glPopMatrix();
 
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 		
 	}
@@ -58,10 +58,10 @@ public:
 		
 		glPushMatrix();
 
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, redPillarTex);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 		gluQuadricTexture(qobj, GL_TRUE);
-		gluQuadricNormals(qobj, GLU_SMOOTH);*/
+		gluQuadricNormals(qobj, GLU_SMOOTH);
 
 		for (float j = 0; j < 360; j += 45) {
 			glRotatef(45, 0, 0, 1);
@@ -113,7 +113,7 @@ public:
 
 		glPopMatrix();
 
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 		glPopMatrix();	
 	}
 
@@ -122,32 +122,32 @@ public:
 		
 		
 		glPushMatrix();
-		/*glEnable(GL_TEXTURE_2D);
-			glBindTexture(GL_TEXTURE_2D, redPillarTex);
-			gluQuadricTexture(qobj, GL_TRUE);
-			gluQuadricNormals(qobj, GLU_SMOOTH);
-			glRotatef(90, -1, 0, 0);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		gluQuadricTexture(qobj, GL_TRUE);
+		gluQuadricNormals(qobj, GLU_SMOOTH);
+			
 
 		for (int i = 3; i < comTowerHeight; i += 3) {
 			glTranslatef(0, 0, 3);
 			glutSolidTorus(0.15, comTowerDistanceFromOrigin + comTowerPillarRadius, 100, 100);
 		}
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 
 		glPopMatrix();
 	}
 
 public:
-	void renderComtower(GLuint tex ,GLUquadricObj* qobj) {
+	void renderComtower(GLuint pillartex, GLuint stagetex, GLUquadricObj* qobj) {
 		glPushMatrix();
 		glRotatef(90, -1, 0, 0);
 		
 		
-		drawPillars(tex, qobj);
-		drawCircularPillars(tex, qobj);
+		drawPillars(pillartex, qobj);
+		drawCircularPillars(pillartex, qobj);
 		
 		glTranslatef(0,0,comTowerHeight);
-		drawStage(tex, qobj);
+		drawStage(stagetex, qobj);
 
 		glPopMatrix();
 	}

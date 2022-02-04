@@ -35,9 +35,18 @@ GLfloat camZ = 0.0f;
 
 GLUquadricObj* qobj;
 
-
+GLuint steelTex;
+GLuint steelTexFins;
+GLuint concreteTex;
+GLuint concreteTexBase;
+GLuint redPillarTex;
+GLuint whiteMetalTex;
 GLuint blackTex;
 GLuint offGreyTex;
+GLuint offWhiteTex;
+GLuint znTex;
+GLuint redRustTex;
+GLuint baremetalTex;
 
 void init();
 void display();
@@ -48,6 +57,110 @@ void Timer(int);
 void setupLighting();
 
 GLfloat animateRotation = 0.0f; //global add to glrotatef
+
+void initTexture() {
+    baremetalTex = SOIL_load_OGL_texture
+    (
+        "textures/bare-metal.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    steelTex = SOIL_load_OGL_texture
+    (
+        "textures/steel-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    steelTexFins = SOIL_load_OGL_texture
+    (
+        "textures/steel-tex-fins.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    concreteTex = SOIL_load_OGL_texture
+    (
+        "textures/concrete-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    concreteTexBase = SOIL_load_OGL_texture
+    (
+        "textures/concrete-tex.bmp",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    redPillarTex = SOIL_load_OGL_texture
+    (
+        "textures/red-pillar-tex.bmp",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    whiteMetalTex = SOIL_load_OGL_texture
+    (
+        "textures/white-metal-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    blackTex = SOIL_load_OGL_texture
+    (
+        "textures/black-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    offGreyTex = SOIL_load_OGL_texture
+    (
+        "textures/off-grey-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    offWhiteTex = SOIL_load_OGL_texture
+    (
+        "textures/off-white-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    znTex = SOIL_load_OGL_texture
+    (
+        "textures/zinc-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+    redRustTex = SOIL_load_OGL_texture
+    (
+        "textures/red-rust-tex.jpg",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    );
+
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+}
 
 void setMaterials() {//call inside the drawing funtion at top , can define different for dif
     float mat_ambient[] = { 0.329f, 0.223f, 0.0274f, 1.0f };
@@ -111,23 +224,7 @@ void init() {
     glShadeModel(GL_SMOOTH); // or GL_FLAT 
     glEnable(GL_COLOR_MATERIAL);
 
- 
-
-    blackTex = SOIL_load_OGL_texture
-    (
-        "F:/FOS/300L/CS308 Computer Graphics Programming Practical/starship/textures/black-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
-
-    offGreyTex = SOIL_load_OGL_texture
-    (
-        "F:/FOS/300L/CS308 Computer Graphics Programming Practical/starship/textures/off-grey-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    initTexture();
 
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
     qobj = gluNewQuadric();
@@ -156,6 +253,21 @@ void reshape(GLsizei w, GLsizei h) {
 
 }
 
+void renderBase(GLuint tex) {
+
+    glPushMatrix();
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, tex);
+    gluQuadricTexture(qobj, GL_TRUE);
+    gluQuadricNormals(qobj, GLU_SMOOTH);
+    glRotatef(90, -1, 0, 0);
+    gluDisk(qobj, 0, 40, 50, 50);
+   
+
+    glDisable(GL_TEXTURE_2D);
+    glPopMatrix();
+}
+
 void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
@@ -172,21 +284,23 @@ void display() {
     drawAxes();
     drawGrid();
 
+    //stage
     glPushMatrix();
     Launchstage ls;
-    ls.renderLaunchStage();
+    ls.renderLaunchStage(concreteTex);
     glPopMatrix();
     
-
+    //superheavy and starship
     glPushMatrix();
     Superheavy sh;
     Starship ss;
-    sh.renderSuperheavy(offGreyTex, qobj);
+    sh.renderSuperheavy(steelTex,steelTexFins, qobj);
 
     glTranslatef(0, sh.getSuperheavyHeight(), 0);
-    ss.renderStarship(offGreyTex, qobj);
+    ss.renderStarship(steelTex,steelTexFins, qobj);
     glPopMatrix();
 
+    //launchtower
     glPushMatrix();
     Launchtower lt;
     glTranslatef(0, 0, 6);
@@ -195,13 +309,46 @@ void display() {
     lt.renderLaunchtower(offGreyTex, blackTex, qobj);
     glPopMatrix();
 
+    //sup
     glPushMatrix();
     glTranslatef(-0.3, sh.getSuperheavyHeight() - 3, 1);
-    lt.renderLauchsupport(offGreyTex, qobj);
+    lt.renderLauchsupport(znTex, qobj);
     
     glTranslatef(0, ss.getstarshipHeight() - 2, 0);
-    lt.renderLauchsupport(offGreyTex, qobj);
+    lt.renderLauchsupport(znTex, qobj);
     glPopMatrix();
+
+    //base
+    glPushMatrix();
+    glTranslatef(0, -4, 0);
+    renderBase(concreteTexBase);
+    glPopMatrix();
+
+    glPushMatrix();
+    Comtower ct;
+    glTranslatef(20, -4, -20);
+    ct.renderComtower(redPillarTex, whiteMetalTex, qobj);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-20, -4, 20);
+    ct.renderComtower(redPillarTex, whiteMetalTex, qobj);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(20, -4, 20);
+    ct.renderComtower(redPillarTex, whiteMetalTex, qobj);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-17, -4, -15);
+    O2tower o2t;
+    o2t.renderO2tower(qobj, baremetalTex, blackTex, redRustTex);
+    glPopMatrix();
+
+    //glPushMatrix();
+    //
+    //glPopMatrix();
 
     glPopMatrix();
     glutSwapBuffers();

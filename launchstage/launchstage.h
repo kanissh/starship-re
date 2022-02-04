@@ -8,11 +8,12 @@
 class Launchstage {
 
 public:
-	void renderLaunchStage() {
+	void renderLaunchStage(GLuint tex) {
 		
 		glPushMatrix();
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, concreteTex);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+
 
 		//front slant
 		glPushMatrix();
@@ -108,16 +109,18 @@ public:
 		glVertex3f(10, -4, 10);
 		glEnd();
 		glPopMatrix();
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 
-		drawPlatform();
+		drawPlatform(tex);
 		glPopMatrix();
 
 	}
 
 private:
-	void drawPlatform() {
+	void drawPlatform(GLuint tex) {
 		glPushMatrix();
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
 		GLfloat elevation = 0.5f;
 		glColor3f(1.0f, 0.0f, 0.0f);
 		glBegin(GL_QUADS);
@@ -166,6 +169,7 @@ private:
 		glTexCoord2f(0.0, 1.0); glVertex3f(-5, -elevation, -6);
 
 		glEnd();
+		glDisable(GL_TEXTURE_2D);
 		glPopMatrix();
 
 	}

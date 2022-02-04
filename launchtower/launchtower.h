@@ -49,8 +49,10 @@ public:
 	void renderLauchsupport(GLuint tex, GLUquadricObj* qobj) {
 		glPushMatrix();
 		glColor3f(0.1, 0.2, 1);
-		/*glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, tex);*/
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, tex);
+		gluQuadricTexture(qobj, GL_TRUE);
+		gluQuadricNormals(qobj, GLU_SMOOTH);
 		
 		//corner poles
 		glPushMatrix();
@@ -101,7 +103,7 @@ public:
 
 		glPopMatrix();
 
-		//glDisable(GL_TEXTURE_2D);
+		glDisable(GL_TEXTURE_2D);
 	}
 
 public:
@@ -109,6 +111,7 @@ public:
 		//front
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, offGreyTex);
+		
 		glPushMatrix();
 		glBegin(GL_QUAD_STRIP);
 		glTexCoord2f(0.0, 0.0); glVertex3f(0, 0, 0);
@@ -142,7 +145,7 @@ public:
 
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, blackTex);
-
+		
 		//right
 		glPushMatrix();
 		glColor3f(0.1, 1, 0);
