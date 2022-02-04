@@ -159,7 +159,7 @@ public:
 	}
 
 public:
-	void drawLaunchtower(GLuint offGreyTex, GLuint blackTex) {
+	void renderLaunchtower(GLuint offGreyTex, GLuint blackTex) {
 		//front
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, offGreyTex);

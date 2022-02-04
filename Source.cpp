@@ -192,9 +192,9 @@ void display() {
     //ct.drawStage(offGreyTex ,qobj);
     //ct.renderComtower(offGreyTex, qobj);
 
-    Launchtower lt;
+    //Launchtower lt;
     //lt.renderLaunchtower(offGreyTex, blackTex);
-    lt.drawLauchsupport(offGreyTex, qobj);
+    //lt.drawLauchsupport(offGreyTex, qobj);
     
     glPopMatrix();
 
