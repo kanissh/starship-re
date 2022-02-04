@@ -187,10 +187,13 @@ void display() {
     o2t.drawCenterpipe(offGreyTex, qobj, 10);
     o2t.renderO2tower(qobj, offGreyTex, offGreyTex, offGreyTex);*/
 
-    Comtower ct;
+    //Comtower ct;
     //ct.drawCircularPillars(offGreyTex ,qobj);
     //ct.drawStage(offGreyTex ,qobj);
-    ct.renderComtower(offGreyTex, qobj);
+    //ct.renderComtower(offGreyTex, qobj);
+
+    //Launchtower lt;
+    //lt.renderLaunchtower(offGreyTex, blackTex);
     
     glPopMatrix();
 
