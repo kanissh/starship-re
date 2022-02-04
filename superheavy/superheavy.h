@@ -14,6 +14,11 @@ private:
 	GLfloat bottomFinHeight = 3.75;
 
 public:
+	GLfloat getSuperheavyHeight() {
+		return superheavyHeight;
+	}
+
+public:
 	void drawBody(GLuint tex, GLUquadricObj* qobj, GLfloat radius, GLfloat height) {
 		glPushMatrix();
 		glColor3f(1, 0.2, 0);

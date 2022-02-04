@@ -43,5 +43,8 @@
     <ClInclude Include="comtower\comtower.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="launchstage\launchstage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

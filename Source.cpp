@@ -10,6 +10,7 @@
 #include "superheavy/superheavy.h"
 #include "o2tower/o2tower.h"
 #include "comtower/comtower.h"
+#include "launchstage/launchstage.h"
 
 
 GLfloat windowW = 10;
@@ -172,30 +173,34 @@ void display() {
     drawGrid();
 
     glPushMatrix();
-    //drawing code
-    //drawLaunchTower(offGreyTex, blackTex, 23.3);
+    Launchstage ls;
+    ls.renderLaunchStage();
+    glPopMatrix();
     
-   /* Superheavy sh;
+
+    glPushMatrix();
+    Superheavy sh;
+    Starship ss;
     sh.renderSuperheavy(offGreyTex, qobj);
 
-    Starship ss;
-    glTranslatef(0, 15, 0);
-    ss.renderStarship(offGreyTex, qobj);*/
+    glTranslatef(0, sh.getSuperheavyHeight(), 0);
+    ss.renderStarship(offGreyTex, qobj);
+    glPopMatrix();
 
-    /*O2tower o2t;
-    o2t.drawTank(offGreyTex, qobj);
-    o2t.drawCenterpipe(offGreyTex, qobj, 10);
-    o2t.renderO2tower(qobj, offGreyTex, offGreyTex, offGreyTex);*/
+    glPushMatrix();
+    Launchtower lt;
+    glTranslatef(0, 0, 6);
+    glRotatef(90, 0, 1, 0);
+    glTranslatef(0, 0, 0.5);
+    lt.renderLaunchtower(offGreyTex, blackTex, qobj);
+    glPopMatrix();
 
-    //Comtower ct;
-    //ct.drawCircularPillars(offGreyTex ,qobj);
-    //ct.drawStage(offGreyTex ,qobj);
-    //ct.renderComtower(offGreyTex, qobj);
-
-    //Launchtower lt;
-    //lt.renderLaunchtower(offGreyTex, blackTex);
-    //lt.drawLauchsupport(offGreyTex, qobj);
+    glPushMatrix();
+    glTranslatef(-0.3, sh.getSuperheavyHeight() - 3, 1);
+    lt.renderLauchsupport(offGreyTex, qobj);
     
+    glTranslatef(0, ss.getstarshipHeight() - 2, 0);
+    lt.renderLauchsupport(offGreyTex, qobj);
     glPopMatrix();
 
     glPopMatrix();

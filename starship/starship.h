@@ -20,6 +20,11 @@ private:
 	GLfloat starshipHeight = 8.3; //11
 
 public:
+	GLfloat getstarshipHeight() {
+		return starshipHeight;
+	}
+
+public:
 	void drawBody(GLuint tex, GLUquadricObj* qobj, GLfloat radius, GLfloat height) {
 		glPushMatrix();
 

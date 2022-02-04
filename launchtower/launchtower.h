@@ -10,6 +10,7 @@ private:
 	GLfloat starshipHeight = 8.3; //11
 	GLfloat superheavyHeight = 15;
 	GLfloat launchtowerHeight = starshipHeight + superheavyHeight;
+	GLfloat launchtowerThickness = 1;
 	GLint cornerPoleLength = 3.4;
 	GLint cornerPoleHeight = 1;
 	GLfloat cornerPoleRadius = 0.1;
@@ -17,12 +18,7 @@ private:
 	GLfloat crossPoleRadius = 0.05;
 	GLfloat sideLength = 0.6;
 
-public:
-	void renderLaunchtower(GLuint offGreyTex, GLuint blackTex) {
-		glPushMatrix();
-		drawLaunchtower(offGreyTex, blackTex);
-		glPopMatrix();
-	}
+
 
 private:
 	void drawCrosshatch(GLUquadricObj* qobj) {
@@ -50,7 +46,7 @@ private:
 	}
 
 public:
-	void drawLauchsupport(GLuint tex, GLUquadricObj* qobj) {
+	void renderLauchsupport(GLuint tex, GLUquadricObj* qobj) {
 		glPushMatrix();
 		glColor3f(0.1, 0.2, 1);
 		/*glEnable(GL_TEXTURE_2D);
@@ -109,57 +105,7 @@ public:
 	}
 
 public:
-	void drawCylinder(GLfloat radius, GLfloat height, GLfloat r, GLfloat g, GLfloat b) {
-		GLfloat y = 0.0;
-		GLfloat z = 0.0;
-		GLfloat angle = 0.0;
-		GLfloat angle_stepsize = 0.1;
-
-		glColor3f(r, g, b);
-
-		// TUBE
-		glBegin(GL_QUAD_STRIP);
-		angle = 2 * 3.14;
-		while (angle >= 0.0) {
-			y = radius * sin(angle);
-			z = radius * cos(angle);
-			glVertex3f(height, y, z);
-			glVertex3f(0.0, y, z);
-			angle = angle - angle_stepsize;
-		}
-		glVertex3f(height, 0.0, radius);
-		glVertex3f(0.0, 0.0, radius);
-		glEnd();
-
-		// BACK
-		glColor3f(1.0, 1.0, 0.5);
-		glBegin(GL_POLYGON);
-		angle = 0.0;
-		while (angle < 2 * 3.14) {
-			y = radius * sin(angle);
-			z = radius * cos(angle);
-			glVertex3f(0.0, y, z);
-			angle = angle + angle_stepsize;
-		}
-		glVertex3f(0.0, 0.0, radius);
-		glEnd();
-
-		// FRONT
-		glColor3f(1.0, 1.0, 0.5);
-		glBegin(GL_POLYGON);
-		angle = 2 * 3.14 - angle_stepsize;
-		while (angle >= 0.0) {
-			y = radius * sin(angle);
-			z = radius * cos(angle);
-			glVertex3f(height, y, z);
-			angle = angle - angle_stepsize;
-		}
-		glVertex3f(height, 0.0, radius);
-		glEnd();
-	}
-
-public:
-	void renderLaunchtower(GLuint offGreyTex, GLuint blackTex) {
+	void drawLaunchtower(GLuint offGreyTex, GLuint blackTex) {
 		//front
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, offGreyTex);
@@ -178,7 +124,7 @@ public:
 
 		//back
 		glPushMatrix();
-		glTranslatef(0, 0, -0.5);
+		glTranslatef(0, 0, -launchtowerThickness);
 		glNormal3f(0, 0, -1);
 		glBegin(GL_QUAD_STRIP);
 		glTexCoord2f(0.0, 0.0); glVertex3f(2, 0, 0);
@@ -202,13 +148,13 @@ public:
 		glColor3f(0.1, 1, 0);
 		glBegin(GL_QUAD_STRIP);
 		glTexCoord2f(0.0, 0.0); glVertex3f(2, 0, 0);
-		glTexCoord2f(1.0, 0.0); glVertex3f(2, 0, -0.5);
+		glTexCoord2f(1.0, 0.0); glVertex3f(2, 0, -launchtowerThickness);
 		glTexCoord2f(1.0, 1.0); glVertex3f(2, launchtowerHeight - 4, 0);
-		glTexCoord2f(0.0, 1.0); glVertex3f(2, launchtowerHeight - 4, -0.5);
+		glTexCoord2f(0.0, 1.0); glVertex3f(2, launchtowerHeight - 4, -launchtowerThickness);
 		glTexCoord2f(0.0, 0.0); glVertex3f(4, launchtowerHeight - 1, 0);
-		glTexCoord2f(1.0, 0.0); glVertex3f(4, launchtowerHeight - 1, -0.5);
+		glTexCoord2f(1.0, 0.0); glVertex3f(4, launchtowerHeight - 1, -launchtowerThickness);
 		glTexCoord2f(1.0, 1.0); glVertex3f(4, launchtowerHeight, 0);
-		glTexCoord2f(0.0, 1.0); glVertex3f(4, launchtowerHeight, -0.5);
+		glTexCoord2f(0.0, 1.0); glVertex3f(4, launchtowerHeight, -launchtowerThickness);
 		glEnd();
 		glPopMatrix();
 
@@ -218,8 +164,8 @@ public:
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0); glVertex3f(0, 0, 0);
 		glTexCoord2f(1.0, 0.0); glVertex3f(4, 0, 0);
-		glTexCoord2f(1.0, 1.0); glVertex3f(4, 0, -0.5);
-		glTexCoord2f(0.0, 1.0); glVertex3f(0, 0, -0.5);
+		glTexCoord2f(1.0, 1.0); glVertex3f(4, 0, -launchtowerThickness);
+		glTexCoord2f(0.0, 1.0); glVertex3f(0, 0, -launchtowerThickness);
 		glEnd();
 		glPopMatrix();
 
@@ -228,8 +174,8 @@ public:
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0); glVertex3f(0, 0, 0);
 		glTexCoord2f(1.0, 0.0); glVertex3f(0, launchtowerHeight, 0);
-		glTexCoord2f(1.0, 1.0); glVertex3f(0, launchtowerHeight, -0.5);
-		glTexCoord2f(0.0, 1.0); glVertex3f(0, 0, -0.5);
+		glTexCoord2f(1.0, 1.0); glVertex3f(0, launchtowerHeight, -launchtowerThickness);
+		glTexCoord2f(0.0, 1.0); glVertex3f(0, 0, -launchtowerThickness);
 		glEnd();
 		glPopMatrix();
 
@@ -237,8 +183,8 @@ public:
 		glPushMatrix();
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0); glVertex3f(0, 0, 0);
-		glTexCoord2f(1.0, 0.0); glVertex3f(0, 0, -0.5);
-		glTexCoord2f(1.0, 1.0); glVertex3f(2, 0, -0.5);
+		glTexCoord2f(1.0, 0.0); glVertex3f(0, 0, -launchtowerThickness);
+		glTexCoord2f(1.0, 1.0); glVertex3f(2, 0, -launchtowerThickness);
 		glTexCoord2f(0.0, 1.0); glVertex3f(2, 0, 0);
 		glEnd();
 		glPopMatrix();
@@ -246,6 +192,12 @@ public:
 		glDisable(GL_TEXTURE_2D);
 	}
 
+public:
+	void renderLaunchtower(GLuint offGreyTex, GLuint blackTex, GLUquadricObj* qobj) {
+		glPushMatrix();
+		drawLaunchtower(offGreyTex, blackTex);
+		glPopMatrix();
+	}
 
 };
 
