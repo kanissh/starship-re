@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="barebones.h" />
     <ClInclude Include="comtower\comtower.h" />
+    <ClInclude Include="container\container.h" />
     <ClInclude Include="launchstage\launchstage.h" />
     <ClInclude Include="launchtower\launchtower.h" />
     <ClInclude Include="starship\starship.h" />

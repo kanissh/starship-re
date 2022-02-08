@@ -11,6 +11,7 @@
 #include "o2tower/o2tower.h"
 #include "comtower/comtower.h"
 #include "launchstage/launchstage.h"
+#include "container/container.h"
 
 
 GLfloat windowW = 10;
@@ -61,6 +62,9 @@ GLboolean launchFlag = false;
 GLfloat launchSupportDisplacement = 0;
 GLfloat rocketPathDisplacement = 0;
 
+Container whitecon;
+Container bluecon;
+
 
 void init();
 void display();
@@ -73,110 +77,124 @@ void setupLighting();
 GLfloat animateRotation = 0.0f; //global add to glrotatef
 
 void initTexture() {
-    baremetalTex = SOIL_load_OGL_texture
-    (
-        "textures/bare-metal.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //baremetalTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/bare-metal.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    steelTex = SOIL_load_OGL_texture
-    (
-        "textures/steel-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //steelTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/steel-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    steelTexFins = SOIL_load_OGL_texture
-    (
-        "textures/steel-tex-fins.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //steelTexFins = SOIL_load_OGL_texture
+    //(
+    //    "textures/steel-tex-fins.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    concreteTex = SOIL_load_OGL_texture
-    (
-        "textures/concrete-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //concreteTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/concrete-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    concreteTexBase = SOIL_load_OGL_texture
-    (
-        "textures/concrete-tex.bmp",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //concreteTexBase = SOIL_load_OGL_texture
+    //(
+    //    "textures/concrete-tex.bmp",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    redPillarTex = SOIL_load_OGL_texture
-    (
-        "textures/red-pillar-tex.bmp",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //redPillarTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/red-pillar-tex.bmp",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    whiteMetalTex = SOIL_load_OGL_texture
-    (
-        "textures/white-metal-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //whiteMetalTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/white-metal-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    blackTex = SOIL_load_OGL_texture
-    (
-        "textures/black-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //blackTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/black-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    offGreyTex = SOIL_load_OGL_texture
-    (
-        "textures/off-grey-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //offGreyTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/off-grey-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    offWhiteTex = SOIL_load_OGL_texture
-    (
-        "textures/off-white-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //offWhiteTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/off-white-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    znTex = SOIL_load_OGL_texture
-    (
-        "textures/zinc-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //znTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/zinc-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
-    redRustTex = SOIL_load_OGL_texture
-    (
-        "textures/red-rust-tex.jpg",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-        SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //redRustTex = SOIL_load_OGL_texture
+    //(
+    //    "textures/red-rust-tex.jpg",
+    //    SOIL_LOAD_AUTO,
+    //    SOIL_CREATE_NEW_ID,
+    //    SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
 
 
-    skyTex = SOIL_load_OGL_texture
-    (
-       "textures/sky.jpg",
-       SOIL_LOAD_AUTO,
-       SOIL_CREATE_NEW_ID,
-       SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
-    );
+    //skyTex = SOIL_load_OGL_texture
+    //(
+    //   "textures/sky.jpg",
+    //   SOIL_LOAD_AUTO,
+    //   SOIL_CREATE_NEW_ID,
+    //   SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+    //);
+    ////
+    whitecon.loadTextures("textures/container-tex/front-white-2.jpg",
+        "textures/container-tex/back.jpg",
+        "textures/container-tex/side-white.jpg",
+        "textures/container-tex/side-white.jpg",
+        "textures/container-tex/top-bottom-white.jpg",
+        "textures/container-tex/top-bottom-white.jpg");
+
+    bluecon.loadTextures("textures/container-tex/door-blue.jpg",
+        "textures/container-tex/back-blue.jpg",
+        "textures/container-tex/side-blue.jpg",
+        "textures/container-tex/side-blue.jpg",
+        "textures/container-tex/top-bottom-blue.jpg",
+        "textures/container-tex/top-bottom-blue.jpg");
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -329,70 +347,70 @@ void display() {
         drawGrid();
     }
 
-    glPushMatrix();
-    renderSky(skyTex);
-    glPopMatrix();
+    //glPushMatrix();
+    //renderSky(skyTex);
+    //glPopMatrix();
 
-    //stage
-    glPushMatrix();
-    Launchstage ls;
-    ls.renderLaunchStage(concreteTex);
-    glPopMatrix();
-    
-    //superheavy and starship
-    glPushMatrix();
-    if (launchFlag && launchSupportDisplacement >= 2) {
+    ////stage
+    //glPushMatrix();
+    //Launchstage ls;
+    //ls.renderLaunchStage(concreteTex);
+    //glPopMatrix();
+    //
+    ////superheavy and starship
+    //glPushMatrix();
+    //if (launchFlag && launchSupportDisplacement >= 2) {
 
-        if (setCamRocket) {
-            camX = 0; camY = 32; camZ = 0; rotX = 0; rotY = -130; rotZ = 0; moveX = 3; moveY = 0; moveZ = 0;
-            setCamRocket = false;
-        }
+    //    if (setCamRocket) {
+    //        camX = 0; camY = 32; camZ = 0; rotX = 0; rotY = -130; rotZ = 0; moveX = 3; moveY = 0; moveZ = 0;
+    //        setCamRocket = false;
+    //    }
 
-        glTranslatef(0, rocketPathDisplacement, 0);
-        if (camY < 100) {
-            rocketPathDisplacement += 1;
-            camY += 1;
-        }
-    }
+    //    glTranslatef(0, rocketPathDisplacement, 0);
+    //    if (camY < 100) {
+    //        rocketPathDisplacement += 1;
+    //        camY += 1;
+    //    }
+    //}
 
-    Superheavy sh;
-    Starship ss;
-    sh.renderSuperheavy(steelTex,steelTexFins, qobj);
+    //Superheavy sh;
+    //Starship ss;
+    //sh.renderSuperheavy(steelTex,steelTexFins, qobj);
 
-    glTranslatef(0, sh.getSuperheavyHeight(), 0);
-    ss.renderStarship(steelTex,steelTexFins, qobj);
-    glPopMatrix();
+    //glTranslatef(0, sh.getSuperheavyHeight(), 0);
+    //ss.renderStarship(steelTex,steelTexFins, qobj);
+    //glPopMatrix();
 
-    //launchtower
-    glPushMatrix();
-    Launchtower lt;
-    glTranslatef(0, 0, 6);
-    glRotatef(90, 0, 1, 0);
-    glTranslatef(0, 0, 0.5);
-    lt.renderLaunchtower(offGreyTex, blackTex, qobj);
-    glPopMatrix();
+    ////launchtower
+    //glPushMatrix();
+    //Launchtower lt;
+    //glTranslatef(0, 0, 6);
+    //glRotatef(90, 0, 1, 0);
+    //glTranslatef(0, 0, 0.5);
+    //lt.renderLaunchtower(offGreyTex, blackTex, qobj);
+    //glPopMatrix();
 
-    //sup
-    glPushMatrix();
-    if (launchFlag) {
+    ////sup
+    //glPushMatrix();
+    //if (launchFlag) {
 
-        if (setCamSupports) {
-            camX = 0; camY = 21; camZ = 0; rotX = 0; rotY = -90; rotZ =0; moveX = 3; moveY = 0; moveZ = 0;
-            setCamSupports = false;
-        }
-        
-        glTranslatef(0, 0, launchSupportDisplacement);
-        if (launchSupportDisplacement < 2) {
-            launchSupportDisplacement += 0.2;
-        }
-    }
+    //    if (setCamSupports) {
+    //        camX = 0; camY = 21; camZ = 0; rotX = 0; rotY = -90; rotZ =0; moveX = 3; moveY = 0; moveZ = 0;
+    //        setCamSupports = false;
+    //    }
+    //    
+    //    glTranslatef(0, 0, launchSupportDisplacement);
+    //    if (launchSupportDisplacement < 2) {
+    //        launchSupportDisplacement += 0.2;
+    //    }
+    //}
 
-    glTranslatef(-0.3, sh.getSuperheavyHeight() - 3, 1);
-    lt.renderLauchsupport(znTex, qobj);
-    
-    glTranslatef(0, ss.getstarshipHeight() - 2, 0);
-    lt.renderLauchsupport(znTex, qobj);
-    glPopMatrix();
+    //glTranslatef(-0.3, sh.getSuperheavyHeight() - 3, 1);
+    //lt.renderLauchsupport(znTex, qobj);
+    //
+    //glTranslatef(0, ss.getstarshipHeight() - 2, 0);
+    //lt.renderLauchsupport(znTex, qobj);
+    //glPopMatrix();
 
     //base
     glPushMatrix();
@@ -400,31 +418,61 @@ void display() {
     renderBase(concreteTexBase);
     glPopMatrix();
 
+    //comm. tower
     glPushMatrix();
     Comtower ct;
-    glTranslatef(20, -4, -20);
+    glTranslatef(25, -4, -25);
     ct.renderComtower(redPillarTex, whiteMetalTex, qobj);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(-20, -4, 20);
+    glTranslatef(-25, -4, 25);
     ct.renderComtower(redPillarTex, whiteMetalTex, qobj);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(20, -4, 20);
+    glTranslatef(25, -4, 25);
     ct.renderComtower(redPillarTex, whiteMetalTex, qobj);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(-17, -4, -15);
+    glTranslatef(-20, -4, -20);
     O2tower o2t;
     o2t.renderO2tower(qobj, baremetalTex, blackTex, redRustTex);
     glPopMatrix();
 
-    //glPushMatrix();
+    glPushMatrix();
+    //          |10|
+    //    |11|  |9|
+    //    |6,7||5,8|  
+    // |1||2,3||4|
     //
-    //glPopMatrix();
+    //
+    glTranslatef(-25,-4, 30);
+    bluecon.renderContainer(6, 2.5);//1
+
+    glTranslatef(6, 0, 0);
+    whitecon.renderContainer(6, 2.5);//2
+    glTranslatef(0, 2.5, 0);
+    whitecon.renderContainer(6, 2.5);//3
+    glTranslatef(6, -2.5, 0);
+    bluecon.renderContainer(6, 2.5);//4
+    glTranslatef(0, 0, -2.5);
+    whitecon.renderContainer(6, 2.5);//5
+    glTranslatef(-6, 0, 0);
+    whitecon.renderContainer(6, 2.5);//6
+    glTranslatef(0, 2.5, 0);
+    bluecon.renderContainer(6, 2.5);//7
+    glTranslatef(6, 0, 0);
+    bluecon.renderContainer(6, 2.5);//8
+    glTranslatef(0, -2.5, -2.5);
+    whitecon.renderContainer(6, 2.5);//9
+    glTranslatef(0, 0, -2.5);
+    bluecon.renderContainer(6, 2.5);//10
+    glTranslatef(-6, 0, 2.5);
+    whitecon.renderContainer(6, 2.5);//11
+    glPopMatrix();
+
 
     glPopMatrix();
     glutSwapBuffers();
