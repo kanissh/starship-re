@@ -151,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="barebones.h" />
+    <ClInclude Include="building\building.h" />
     <ClInclude Include="comtower\comtower.h" />
     <ClInclude Include="container\container.h" />
     <ClInclude Include="launchstage\launchstage.h" />

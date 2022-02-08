@@ -1,7 +1,6 @@
 #include<SOIL2.h>
 #include<glut.h>
 
-
 #pragma once
 #ifndef container
 #define container
@@ -101,8 +100,6 @@ public:
 		glTexCoord2f(1, 1); glVertex3f(length, width, -width);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
-
-
 		
 		//front
 		glEnable(GL_TEXTURE_2D);
@@ -115,9 +112,6 @@ public:
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
 		
-
-		
-		
 		//back
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, backtex);
@@ -128,8 +122,6 @@ public:
 		glTexCoord2f(0, 1); glVertex3f(length, width, 0);
 		glEnd();
 		glDisable(GL_TEXTURE_2D);
-
-		
 		
 		//top
 		glEnable(GL_TEXTURE_2D);
