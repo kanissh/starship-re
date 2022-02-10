@@ -1,0 +1,9 @@
+﻿cl : command line warning D9035: option 'Gm' has been deprecated and will be removed in a future release
+cl : command line warning D9025: overriding '/TC' with '/TP'
+  wfETC.c
+  SOIL2.c
+  image_helper.c
+  image_DXT.c
+  Generating Code...
+  soil2-shared-lib.vcxproj -> C:\Users\kanis\Downloads\SOIL2-release-1.20\lib\windows\soil2-debug.dll
+  soil2-shared-lib.vcxproj -> ..\..\lib\windows\soil2-debug.pdb (Partial PDB)
